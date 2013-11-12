@@ -19,37 +19,42 @@ int l[1001][1001];
 int main()
 {
 	
-	fstream cin("a.txt");
+//	fstream cin("a.txt");
 	getline(cin, source);
-	cout<<source<<endl;
+//	cout<<source<<endl;
 	for(int i = 1; i <= source.length() - 1; i++)
 	{
 		if(source[i - 1] == source[i])
-			l[i - 1][i] = 2;
+			l[i][i + 1] = 2;
 		l[i][i] = 1;
 	}
+	l[source.length()][source.length()] = 1;
 
-	for(int i  = 1; i <= source.length(); i++)
+/*	for(int i  = 1; i <= source.length(); i++)
 	{
 		for(int j = 1; j <= source.length(); j++)
 			cout<<l[i][j]<<" ";
 		cout<<endl;
-	}
-	cout<<endl<<endl;
+	}*/
+	//cout<<endl<<endl;
+	int max = 1;
 	for(int len = 2; len <= source.length() - 1; len++)
 	{
 		for(int i = 1; i <= source.length() - len; i++)
 		{
 			int j = i + len;
 			if(source[i - 1] == source[j - 1] && l[i + 1][j - 1] != 0)
+			{
 				l[i][j] = l[i + 1][j - 1] + 2;
+				max = l[i][j];
+			}
 		}
 	}
-
-	for(int i  = 1; i <= source.length(); i++)
+	cout<<max<<endl;
+/*	for(int i  = 1; i <= source.length(); i++)
 	{
 		for(int j = 1; j <= source.length(); j++)
 			cout<<l[i][j]<<" ";
 		cout<<endl;
-	}
+	}*/
 }
